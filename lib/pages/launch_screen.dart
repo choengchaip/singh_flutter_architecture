@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
+import 'package:singh_architecture/middlewares/GeneralMiddleWare.dart';
+import 'package:singh_architecture/pages/product_page.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
+import 'package:singh_architecture/repositories/product_repository.dart';
 
 class LaunchScreen extends StatefulWidget {
   final BasePageRepository launchScreenRepository;
@@ -22,13 +25,16 @@ class LaunchScreen extends StatefulWidget {
 class LaunchScreenState extends State<LaunchScreen> {
   IContext myContext;
   IConfig config;
+  ProductRepository productRepository;
 
   @override
   void initState() {
     super.initState();
 
-    this.myContext = Context();
     this.config = Config();
+    this.myContext = Context(
+      config: config,
+    );
 
     widget.launchScreenRepository.toLoadingStatus();
     this.initialConfig();
@@ -39,6 +45,14 @@ class LaunchScreenState extends State<LaunchScreen> {
       await this.config.initial();
       sleep(Duration(seconds: 3));
       widget.launchScreenRepository.toLoadedStatus();
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => GeneralMiddleWare(
+            child: ProductPage(context: this.myContext, config: this.config),
+          ),
+        ),
+      );
     } catch (e) {
       widget.launchScreenRepository.toErrorStatus(e);
     }

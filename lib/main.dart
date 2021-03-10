@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:singh_architecture/cores/launch_screen.dart';
+import 'package:singh_architecture/pages/launch_screen.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 
 void main() {

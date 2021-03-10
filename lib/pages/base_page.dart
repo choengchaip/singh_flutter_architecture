@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:singh_architecture/configs/config.dart';
-import 'package:singh_architecture/cores/base_widget.dart';
+import 'package:singh_architecture/widgets/base_widget.dart';
 import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 
