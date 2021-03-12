@@ -4,29 +4,30 @@ import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductDetailPage extends StatefulWidget {
   final IContext context;
   final IConfig config;
 
-  ProductPage({
+  ProductDetailPage({
     required this.context,
     required this.config,
   });
 
   @override
   State<StatefulWidget> createState() {
-    return PagePageState();
+    return ProductDetailPageState();
   }
 }
 
-class PagePageState extends State<ProductPage> {
+class ProductDetailPageState extends State<ProductDetailPage> {
   late ProductRepository productRepository;
 
   @override
   void initState() {
     super.initState();
 
-    productRepository = widget.context.repositories().productRepository(widget.config);
+    productRepository =
+        widget.context.repositories().productRepository(widget.config);
     productRepository.fetch();
   }
 
@@ -34,7 +35,7 @@ class PagePageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        child: Text("Product"),
+        child: Text("Product Detail"),
       ),
     );
   }
