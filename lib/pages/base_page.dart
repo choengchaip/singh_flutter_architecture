@@ -1,20 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:singh_architecture/configs/config.dart';
-import 'package:singh_architecture/widgets/base_widget.dart';
-import 'package:singh_architecture/cores/context.dart';
+import 'package:flutter/material.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 
 class BasePage extends StatefulWidget {
-  final IContext context;
-  final IConfig config;
   final BasePageRepository pageRepository;
-  final List<BaseWidget> widgets;
+  final List<Widget> widgets;
 
   BasePage({
-    @required this.context,
-    @required this.config,
-    @required this.pageRepository,
-    @required this.widgets,
+    required this.pageRepository,
+    required this.widgets,
   });
 
   @override
@@ -27,11 +21,22 @@ class BasePageState extends State<BasePage> {
   @override
   void initState() {
     super.initState();
-    // Do your thing before start app
+    widget.pageRepository.initial();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: widget.widgets.map((Widget w) {
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: w,
+          );
+        }).toList(),
+      ),
+    );
   }
 }

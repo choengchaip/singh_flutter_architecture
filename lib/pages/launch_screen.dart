@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
-import 'package:singh_architecture/middlewares/GeneralMiddleWare.dart';
-import 'package:singh_architecture/pages/product_page.dart';
+import 'package:singh_architecture/features/products/product_feature.dart';
+import 'package:singh_architecture/middlewares/scaffold_middle_ware.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
 
@@ -13,7 +13,7 @@ class LaunchScreen extends StatefulWidget {
   final BasePageRepository launchScreenRepository;
 
   LaunchScreen({
-    @required this.launchScreenRepository,
+    required this.launchScreenRepository,
   });
 
   @override
@@ -23,9 +23,9 @@ class LaunchScreen extends StatefulWidget {
 }
 
 class LaunchScreenState extends State<LaunchScreen> {
-  IContext myContext;
-  IConfig config;
-  ProductRepository productRepository;
+  late IContext myContext;
+  late IConfig config;
+  ProductRepository? productRepository;
 
   @override
   void initState() {
@@ -48,8 +48,13 @@ class LaunchScreenState extends State<LaunchScreen> {
 
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => GeneralMiddleWare(
-            child: ProductPage(context: this.myContext, config: this.config),
+          builder: (context) => ScaffoldMiddleWare(
+            context: this.myContext,
+            config: this.config,
+            child: ProductFeature(
+              context: myContext,
+              config: config,
+            ),
           ),
         ),
       );
@@ -59,12 +64,18 @@ class LaunchScreenState extends State<LaunchScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    widget.launchScreenRepository.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<bool>(
         stream: widget.launchScreenRepository.isLoadedSC.stream,
         builder: (BuildContext context, data) {
-          if (!data.hasData || data?.data == false) {
+          if (!data.hasData || data.data == false) {
             return Center(
               child: Container(
                 child: Icon(Icons.favorite),
