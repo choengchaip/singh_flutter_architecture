@@ -112,7 +112,7 @@ class NewRepository implements IRepositories {
   final IConfig config;
 
   NewRepository({
-    @required this.config,
+    required this.config,
   });
 
   @override

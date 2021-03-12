@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/repositories/base_repository.dart';
 import 'package:singh_architecture/repositories/types.dart';
@@ -9,10 +8,10 @@ abstract class IContext {
 
 class Context implements IContext {
   final IConfig config;
-  IRepositories _repositories;
+  IRepositories? _repositories;
 
   Context({
-    @required this.config,
+    required this.config,
   });
 
   @override
@@ -22,6 +21,6 @@ class Context implements IContext {
         config: config,
       );
     }
-    return this._repositories;
+    return this._repositories!;
   }
 }

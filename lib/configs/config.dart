@@ -5,18 +5,18 @@ import 'package:singh_architecture/cores/constants.dart';
 abstract class IConfig {
   Future<void> initial();
 
-  String appName();
+  String? appName();
 
-  LANGUAGE defaultLanguage();
+  LANGUAGE? defaultLanguage();
 
-  String baseAPI();
+  String? baseAPI();
 }
 
 class Config implements IConfig {
-  Map<String, dynamic> env;
-  String _appName;
-  LANGUAGE _defaultLanguage;
-  String _baseAPI;
+  Map<String, dynamic>? env;
+  String? _appName;
+  LANGUAGE? _defaultLanguage;
+  String? _baseAPI;
 
   Future<void> initial() async {
     try {
@@ -28,17 +28,17 @@ class Config implements IConfig {
   }
 
   @override
-  String appName() {
+  String? appName() {
     if (this._appName == null) {
-      this._appName = env["app_name"];
+      this._appName = env?["app_name"];
     }
     return this._appName;
   }
 
   @override
-  LANGUAGE defaultLanguage() {
+  LANGUAGE? defaultLanguage() {
     if (this._defaultLanguage == null) {
-      String lang = env["default_language"];
+      String? lang = env?["default_language"];
       if (lang == "en") {
         this._defaultLanguage = LANGUAGE.EN;
       } else {
@@ -49,9 +49,9 @@ class Config implements IConfig {
   }
 
   @override
-  String baseAPI() {
+  String? baseAPI() {
     if (this._baseAPI == null) {
-      this._baseAPI = env["base_api"];
+      this._baseAPI = env?["base_api"];
     }
     return this._baseAPI;
   }

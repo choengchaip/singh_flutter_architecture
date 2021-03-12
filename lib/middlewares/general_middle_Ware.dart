@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:singh_architecture/configs/config.dart';
+import 'package:singh_architecture/cores/context.dart';
 
 class GeneralMiddleWare extends StatefulWidget {
-  final Widget child;
+  final IContext context;
+  final IConfig config;
+  final Widget Function(IContext, IConfig) child;
 
   GeneralMiddleWare({
-    @required this.child,
+    required this.context,
+    required this.config,
+    required this.child,
   });
 
   @override
@@ -17,8 +23,6 @@ class GeneralMiddleWare extends StatefulWidget {
 class GeneralMiddleWareState extends State<GeneralMiddleWare> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: widget.child,
-    );
+    return widget.child(widget.context, widget.config);
   }
 }
