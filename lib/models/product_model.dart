@@ -6,7 +6,6 @@ class ProductModel {
   final String Title;
   final String Price;
   final double Rating;
-  final String ShortDescription;
   final String Description;
 
   ProductModel({
@@ -15,18 +14,17 @@ class ProductModel {
     required this.Title,
     required this.Price,
     required this.Rating,
-    required this.ShortDescription,
     required this.Description,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> rawJson) {
     return ProductModel(
-      Id: rawJson["id"],
+      Id: rawJson["product_id"],
       ThumbnailURL: rawJson["thumbnail_url"],
       Title: rawJson["title"],
-      Price: rawJson["price"],
-      Rating: double.parse(rawJson["rating"]),
-      ShortDescription: rawJson["short_description"],
+      Price: rawJson["price_number"],
+      Rating: 4,
+      // Rating: double.parse(rawJson["rating"]),
       Description: rawJson["description"],
     );
   }

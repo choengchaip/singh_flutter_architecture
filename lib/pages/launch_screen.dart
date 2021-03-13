@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
-import 'package:singh_architecture/features/products/product_feature.dart';
+import 'package:singh_architecture/features/main_feature.dart';
 import 'package:singh_architecture/middlewares/scaffold_middle_ware.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
@@ -53,14 +52,13 @@ class LaunchScreenState extends State<LaunchScreen> {
           builder: (context) => ScaffoldMiddleWare(
             context: this.myContext,
             config: this.config,
-            child: ProductFeature(
+            child: MainFeature(
               context: myContext,
               config: config,
             ),
           ),
         ),
       );
-
     } catch (e) {
       widget.launchScreenRepository.toErrorStatus(e);
     }
