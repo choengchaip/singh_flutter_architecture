@@ -19,19 +19,23 @@ class BannerItem extends StatefulWidget {
 class BannerItemState extends State<BannerItem> {
   @override
   Widget build(BuildContext context) {
-    print(widget.banner?.ImageURL);
-
-    // return Container(
-    //   child: Image.network(widget.banner!.ImageURL),
-    // );
-
     return widget.banner != null
         ? CachedNetworkImage(
-            imageUrl: "http://via.placeholder.com/350x150",
+            imageUrl: widget.banner!.ImageURL,
+            imageBuilder: (context, image) {
+              return Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: image,
+                  fit: BoxFit.fill,
+                )),
+              );
+            },
             progressIndicatorBuilder: (context, url, downloadProgress) {
               return Container(
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(value: downloadProgress.progress),
+                child:
+                    CircularProgressIndicator(value: downloadProgress.progress),
               );
             },
             errorWidget: (context, url, error) => Icon(Icons.error))
