@@ -43,6 +43,8 @@ class LaunchScreenState extends State<LaunchScreen> {
   Future<void> initialConfig() async {
     try {
       await this.config.initial();
+      await this.myContext.initial();
+
       sleep(Duration(seconds: 3));
       widget.launchScreenRepository.toLoadedStatus();
 
@@ -58,6 +60,7 @@ class LaunchScreenState extends State<LaunchScreen> {
           ),
         ),
       );
+
     } catch (e) {
       widget.launchScreenRepository.toErrorStatus(e);
     }
@@ -73,9 +76,9 @@ class LaunchScreenState extends State<LaunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<bool>(
-        stream: widget.launchScreenRepository.isLoadedSC.stream,
-        builder: (BuildContext context, data) {
-          if (!data.hasData || data.data == false) {
+        stream: widget.launchScreenRepository.isLoadingSC.stream,
+        builder: (BuildContext context, snapshot) {
+          if (!snapshot.hasData || snapshot.data == true) {
             return Center(
               child: Container(
                 child: Icon(Icons.favorite),
