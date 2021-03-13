@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
-import 'package:singh_architecture/repositories/product_repository.dart';
+import 'package:singh_architecture/widgets/banners/banner_head_line.dart';
 
 class ProductPage extends StatefulWidget {
   final IContext context;
@@ -15,26 +15,25 @@ class ProductPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return PagePageState();
+    return ProductPageState();
   }
 }
 
-class PagePageState extends State<ProductPage> {
-  late ProductRepository productRepository;
-
-  @override
-  void initState() {
-    super.initState();
-
-    productRepository = widget.context.repositories().productRepository(widget.config);
-    productRepository.fetch();
-  }
-
+class ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text("Product"),
+    return Container(
+      child: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          BannerHeadLine(
+            context: widget.context,
+            config: widget.config,
+          ),
+          Container(
+
+          ),
+        ],
       ),
     );
   }

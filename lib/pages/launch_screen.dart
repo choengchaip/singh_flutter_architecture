@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
-import 'package:singh_architecture/features/products/product_feature.dart';
+import 'package:singh_architecture/features/main_feature.dart';
 import 'package:singh_architecture/middlewares/scaffold_middle_ware.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
@@ -43,6 +42,8 @@ class LaunchScreenState extends State<LaunchScreen> {
   Future<void> initialConfig() async {
     try {
       await this.config.initial();
+      await this.myContext.initial();
+
       sleep(Duration(seconds: 3));
       widget.launchScreenRepository.toLoadedStatus();
 
@@ -51,7 +52,7 @@ class LaunchScreenState extends State<LaunchScreen> {
           builder: (context) => ScaffoldMiddleWare(
             context: this.myContext,
             config: this.config,
-            child: ProductFeature(
+            child: MainFeature(
               context: myContext,
               config: config,
             ),
@@ -73,9 +74,9 @@ class LaunchScreenState extends State<LaunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<bool>(
-        stream: widget.launchScreenRepository.isLoadedSC.stream,
-        builder: (BuildContext context, data) {
-          if (!data.hasData || data.data == false) {
+        stream: widget.launchScreenRepository.isLoadingSC.stream,
+        builder: (BuildContext context, snapshot) {
+          if (!snapshot.hasData || snapshot.data == true) {
             return Center(
               child: Container(
                 child: Icon(Icons.favorite),

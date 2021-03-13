@@ -29,6 +29,8 @@ class BasePageState extends State<BasePage> {
     return Container(
       child: ListView(
         padding: EdgeInsets.zero,
+        scrollDirection: Axis.horizontal,
+        physics: NeverScrollableScrollPhysics(),
         children: widget.widgets.map((Widget w) {
           return Container(
             width: MediaQuery.of(context).size.width,

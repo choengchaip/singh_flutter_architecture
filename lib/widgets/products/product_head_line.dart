@@ -10,5 +10,6 @@ class ProductHeadLine extends StatefulWidget {
 class ProductHeadLineState extends State<ProductHeadLine> {
   @override
   Widget build(BuildContext context) {
+    return Container();
   }
 }
