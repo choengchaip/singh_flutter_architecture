@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/repositories/category_repository.dart';
-import 'package:singh_architecture/styles/fonts.dart';
+import 'package:singh_architecture/widgets/categories/category_item.dart';
 
 class CategoryHeadLine extends StatefulWidget {
   final IContext context;
@@ -42,8 +41,6 @@ class CategoryHeadLineState extends State<CategoryHeadLine> {
 
   @override
   Widget build(BuildContext context) {
-    final double categoryWidth = ((MediaQuery.of(context).size.width) - 32) / 5;
-
     return StreamBuilder<bool>(
       stream: widget.categoryRepository.isLoadingSC.stream,
       builder: (context, snapshot) {
@@ -55,45 +52,15 @@ class CategoryHeadLineState extends State<CategoryHeadLine> {
           alignment: Alignment.center,
           margin: widget.margin,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
               ((widget.categoryRepository.items?.length ?? 0) < 5
                   ? widget.categoryRepository.items!.length
                   : 5),
               (index) {
-                return Container(
-                  width: categoryWidth - 8,
-                  margin: EdgeInsets.all(4),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: categoryWidth - 8,
-                        width: categoryWidth - 8,
-                        margin: EdgeInsets.only(
-                          bottom: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.scaleDown,
-                            image: CachedNetworkImageProvider(
-                              widget.categoryRepository.items![index].ImageURL,
-                            )
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          widget.categoryRepository.items![index].Title,
-                          style: TextStyle(fontSize: s3),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.clip,
-                        ),
-                      ),
-                    ],
-                  ),
+                return CategoryItem(
+                  category: widget.categoryRepository.items![index],
                 );
               },
             ),

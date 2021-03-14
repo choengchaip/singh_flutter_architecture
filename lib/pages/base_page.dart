@@ -21,7 +21,15 @@ class BasePageState extends State<BasePage> {
   @override
   void initState() {
     super.initState();
+
     widget.pageRepository.initial();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    widget.pageRepository.dispose();
   }
 
   @override

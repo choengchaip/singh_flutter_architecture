@@ -3,7 +3,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
     "brand": {
       "background_color": "#FFFFFF",
       "logo_image_url":
-          "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mMmJl3FwFX1c73lnUyBnBxDaEu.png",
+          "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mMmJl3FwFX1c73lnUyBnBxDaEu.png",
       "tag_id": "1mMmMMvBm0YNgCyxQHz51JOFw8C",
       "title": "AKG"
     },
@@ -414,7 +414,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
     "brand": {
       "background_color": "#FFFFFF",
       "logo_image_url":
-          "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1lzwZ7VFtEsslqtFbDLYRCfHYLH.jpg",
+          "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1lzwZ7VFtEsslqtFbDLYRCfHYLH.jpg",
       "tag_id": "1lwx4Gwql10CtkYx5zUH3wpffQa",
       "title": "Apple"
     },
@@ -456,7 +456,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
         "content_type": "image",
         "gallery_id": "",
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mHFBTIsv0yixUKxM4Iez442uMX.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mHFBTIsv0yixUKxM4Iez442uMX.jpg",
         "video_url": ""
       }
     ],
@@ -473,7 +473,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
     "option_images": [
       {
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mHFBTIsv0yixUKxM4Iez442uMX.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mHFBTIsv0yixUKxM4Iez442uMX.jpg",
         "options": [
           {
             "alias": "white",
@@ -595,7 +595,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mHFBTIsv0yixUKxM4Iez442uMX.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mHFBTIsv0yixUKxM4Iez442uMX.jpg",
     "title": "อะแด๊ปเตอร์ Apple 18W USB Power Adapter",
     "updated_date": "2021-03-12 02:43:24"
   },
@@ -603,7 +603,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
     "brand": {
       "background_color": "#FFFFFF",
       "logo_image_url":
-          "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1lzw1zqTjK31mydtuKjbCjN73Sd.jpg",
+          "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1lzw1zqTjK31mydtuKjbCjN73Sd.jpg",
       "tag_id": "1lx8kg9YZrLik9nhPqGHkoXeLxk",
       "title": "Huawei"
     },
@@ -631,7 +631,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
         "content_type": "image",
         "gallery_id": "",
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3FvnunnZkTIp1TlgyYc2dD48T.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3FvnunnZkTIp1TlgyYc2dD48T.jpg",
         "video_url": ""
       }
     ],
@@ -648,7 +648,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
     "option_images": [
       {
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3FvnunnZkTIp1TlgyYc2dD48T.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3FvnunnZkTIp1TlgyYc2dD48T.jpg",
         "options": [
           {
             "alias": "brown",
@@ -771,7 +771,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3FvnunnZkTIp1TlgyYc2dD48T.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3FvnunnZkTIp1TlgyYc2dD48T.jpg",
     "title": "Huawei Watch GT2 Classic Edition Pebble Brown",
     "updated_date": "2021-03-12 02:43:10"
   },
@@ -997,14 +997,14 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
         "content_type": "image",
         "gallery_id": "",
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m31uSOobTsF10eZWAqL2LVy193.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m31uSOobTsF10eZWAqL2LVy193.jpg",
         "video_url": ""
       },
       {
         "content_type": "image",
         "gallery_id": "",
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mPlcMqnjwbOMHI4XU8oXpSTbfi.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mPlcMqnjwbOMHI4XU8oXpSTbfi.jpg",
         "video_url": ""
       }
     ],
@@ -1037,7 +1037,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       },
       {
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m31uSOobTsF10eZWAqL2LVy193.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m31uSOobTsF10eZWAqL2LVy193.jpg",
         "options": [
           {
             "alias": "white",
@@ -1054,7 +1054,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       },
       {
         "image_url":
-            "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mPlcMqnjwbOMHI4XU8oXpSTbfi.jpg",
+            "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mPlcMqnjwbOMHI4XU8oXpSTbfi.jpg",
         "options": [
           {
             "alias": "black",
@@ -1278,7 +1278,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m31uSOobTsF10eZWAqL2LVy193.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m31uSOobTsF10eZWAqL2LVy193.jpg",
     "title": "Samsung Galaxy Buds Live ",
     "updated_date": "2021-03-12 02:38:00"
   },
@@ -1460,7 +1460,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m381fT7N8Iqc6SndOew4TR2EOe.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m381fT7N8Iqc6SndOew4TR2EOe.jpg",
     "title": "สายชาร์จ Apple Lightning to USB-C Cable",
     "updated_date": "2021-03-12 02:33:46"
   },
@@ -1638,7 +1638,7 @@ List<Map<String, dynamic>> mockBestSellerProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3HeVJHrp2M1Jy9B0HFkYxtIUC.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1m3HeVJHrp2M1Jy9B0HFkYxtIUC.jpg",
     "title":
         "เครื่องดูดซับฝุ่นไร ฆ่าเชื้อด้วย UV Xiaomi Deerma Dust Mite Vacuum Cleaner CM800.U",
     "updated_date": "2021-03-12 02:31:18"
