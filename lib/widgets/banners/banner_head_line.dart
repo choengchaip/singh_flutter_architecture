@@ -11,10 +11,12 @@ import 'package:singh_architecture/widgets/banners/banner_item.dart';
 class BannerHeadLine extends StatefulWidget {
   final IContext context;
   final IConfig config;
+  final EdgeInsets? margin;
 
   BannerHeadLine({
     required this.context,
     required this.config,
+    this.margin,
   });
 
   @override
@@ -63,6 +65,7 @@ class BannerHeadLineState extends State<BannerHeadLine> {
           alignment: Alignment.bottomCenter,
           children: [
             Container(
+              margin: widget.margin,
               height: 175,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),

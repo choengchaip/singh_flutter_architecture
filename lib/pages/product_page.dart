@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/widgets/banners/banner_head_line.dart';
+import 'package:singh_architecture/widgets/categories/category_head_line.dart';
 
 class ProductPage extends StatefulWidget {
   final IContext context;
@@ -30,8 +31,10 @@ class ProductPageState extends State<ProductPage> {
             context: widget.context,
             config: widget.config,
           ),
-          Container(
-
+          CategoryHeadLine(
+            margin: EdgeInsets.only(top: 16, bottom: 16,),
+            context: widget.context,
+            config: widget.config,
           ),
         ],
       ),
