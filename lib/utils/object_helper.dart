@@ -4,7 +4,7 @@ class ObjectHelper {
   ObjectHelper._();
 
   static bool isSnapshotStateLoading(AsyncSnapshot<bool> snapshot) {
-    if (!snapshot.hasData || snapshot.data == null || snapshot.data == false) {
+    if (!snapshot.hasData || snapshot.data == null || snapshot.data == true) {
       return true;
     }
 

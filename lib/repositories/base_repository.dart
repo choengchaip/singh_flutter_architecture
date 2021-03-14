@@ -2,9 +2,11 @@ import 'dart:async';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/mocks/banners/banners.dart';
 import 'package:singh_architecture/mocks/categories/categories.dart';
+import 'package:singh_architecture/mocks/products/product_detail.dart';
 import 'package:singh_architecture/mocks/products/products.dart';
 import 'package:singh_architecture/repositories/banner_repository.dart';
 import 'package:singh_architecture/repositories/category_repository.dart';
+import 'package:singh_architecture/repositories/locale_repository.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
 import 'package:singh_architecture/repositories/types.dart';
 
@@ -220,12 +222,13 @@ class NewRepository implements IRepositories {
       options: NewRepositoryOptions(
         baseUrl: "${config.baseAPI()}/products",
         mockItems: mockProducts,
+        mockItem: mockProductDetail,
       ),
     );
   }
 
   @override
-  bannerRepository() {
+  BannerRepository bannerRepository() {
     return BannerRepository(
       config: this.config,
       options: NewRepositoryOptions(
@@ -236,7 +239,7 @@ class NewRepository implements IRepositories {
   }
 
   @override
-  categoryRepository() {
+  CategoryRepository categoryRepository() {
     return CategoryRepository(
       config: this.config,
       options: NewRepositoryOptions(
