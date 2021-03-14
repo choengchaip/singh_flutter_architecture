@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/constants.dart';
 import 'package:singh_architecture/cores/context.dart';
+import 'package:singh_architecture/models/cart_model.dart';
 import 'package:singh_architecture/pages/base_page.dart';
 import 'package:singh_architecture/pages/product_page.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
 import 'package:singh_architecture/styles/colors.dart';
 import 'package:singh_architecture/styles/fonts.dart';
+import 'package:singh_architecture/utils/object_helper.dart';
 import 'package:singh_architecture/widgets/common/top_bar_search.dart';
 
 class MainFeature extends StatefulWidget {
@@ -34,6 +36,8 @@ class MainFeatureState extends State<MainFeature> {
 
     this.pageRepository = PageRepository();
     this.pageRepository.initial();
+
+    widget.context.repositories().cartRepository().fetch();
   }
 
   @override
@@ -73,7 +77,7 @@ class MainFeatureState extends State<MainFeature> {
             width: MediaQuery.of(context).size.width,
             color: colorPrimary,
             padding: EdgeInsets.only(
-              top: 12,
+              top: 6,
               bottom: 12 + MediaQuery.of(context).padding.bottom,
             ),
             child: Row(
@@ -84,6 +88,8 @@ class MainFeatureState extends State<MainFeature> {
                     child: Column(
                       children: [
                         Container(
+                          height: 30,
+                          width: 50,
                           child: Icon(
                             Icons.home_outlined,
                             color: Colors.white,
@@ -108,9 +114,46 @@ class MainFeatureState extends State<MainFeature> {
                     child: Column(
                       children: [
                         Container(
-                          child: Icon(
-                            Icons.shopping_cart,
-                            color: Colors.white,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                height: 30,
+                                width: 50,
+                                child: Icon(
+                                  Icons.shopping_cart,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Positioned(
+                                top: -3,
+                                right: 1,
+                                child: StreamBuilder<bool>(
+                                  stream: widget.context.repositories().cartRepository().isLoadingSC.stream,
+                                  builder: (context, snapshot) {
+                                    print(snapshot.connectionState);
+                                    if(ObjectHelper.isSnapshotStateLoading(snapshot)){
+                                      return Container();
+                                    }
+
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        color: colorSecondary,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Text(
+                                        widget.context.repositories().cartRepository().data?.Products.length.toString() ?? "0",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                ),
+                              )
+                            ],
                           ),
                         ),
                         Container(
@@ -128,26 +171,34 @@ class MainFeatureState extends State<MainFeature> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Icon(
-                            Icons.notifications_none,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            widget.context.localeRepository().getString(Locales.notification),
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: s,
+                  child: GestureDetector(
+                    onTap: (){
+                      print("asd");
+                      widget.context.repositories().cartRepository().fetch();
+                    },
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 30,
+                            width: 50,
+                            child: Icon(
+                              Icons.notifications_none,
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                      ],
+                          Container(
+                            child: Text(
+                              widget.context.localeRepository().getString(Locales.notification),
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: s,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -156,6 +207,8 @@ class MainFeatureState extends State<MainFeature> {
                     child: Column(
                       children: [
                         Container(
+                          height: 30,
+                          width: 50,
                           child: Icon(
                             Icons.account_box_outlined,
                             color: Colors.white,

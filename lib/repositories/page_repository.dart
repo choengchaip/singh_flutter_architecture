@@ -36,8 +36,8 @@ class PageRepository extends BasePageRepository {
   @override
   void initial({Function? callback}) {
     this._pageIndex = 0;
-    this._pageIndexSC = StreamController<int>();
-    this._pageSizeSC = StreamController<int>();
+    this._pageIndexSC = StreamController<int>.broadcast();
+    this._pageSizeSC = StreamController<int>.broadcast();
 
     this.notifyValueChange();
     callback?.call();
@@ -69,8 +69,8 @@ class PageRepository extends BasePageRepository {
 
   @override
   void notifyValueChange() {
-    this._pageIndexSC!.add(this._pageIndex);
-    this._pageSizeSC!.add(this._pageSize);
+    this._pageIndexSC!.sink.add(this._pageIndex);
+    this._pageSizeSC!.sink.add(this._pageSize);
   }
 
   @override

@@ -46,10 +46,8 @@ class ProductPageState extends State<ProductPage> {
     this.pageRepository = PageRepository();
     this.pageRepository.toLoadingStatus();
 
-    SchedulerBinding.instance?.addPostFrameCallback((_) {
-      this.pageRepository.initial();
-      this.initialRepositories();
-    });
+    this.pageRepository.initial();
+    this.initialRepositories();
   }
 
   @override
@@ -106,7 +104,6 @@ class ProductPageState extends State<ProductPage> {
       stream: this.pageRepository.isLoadingSC.stream,
       builder: (context, snapshot) {
         if (ObjectHelper.isSnapshotStateLoading(snapshot)) {
-          // if (true) {
           return Container(
             alignment: Alignment.center,
             child: CircularProgressIndicator(),
