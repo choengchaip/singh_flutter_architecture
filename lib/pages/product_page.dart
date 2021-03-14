@@ -47,6 +47,17 @@ class ProductPageState extends State<ProductPage> {
     this.initialRepositories();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+
+    this.pageRepository.dispose();
+    this.bannerRepository.dispose();
+    this.categoryRepository.dispose();
+    this.newArrivalProductRepository.dispose();
+    this.bestSellerProductRepository.dispose();
+  }
+
   void initialRepositories() {
     try {
       this.bannerRepository = BannerRepository(
@@ -94,15 +105,9 @@ class ProductPageState extends State<ProductPage> {
         }
 
         return Container(
-          margin: EdgeInsets.only(
-            top: 16,
-            bottom: 16,
-          ),
+
           child: ListView(
-            padding: EdgeInsets.only(
-              left: 16,
-              right: 16,
-            ),
+            padding: EdgeInsets.all(8),
             children: [
               BannerHeadLine(
                 margin: EdgeInsets.only(

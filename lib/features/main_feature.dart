@@ -36,6 +36,13 @@ class MainFeatureState extends State<MainFeature> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+
+    this.pageRepository.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
@@ -65,7 +72,7 @@ class MainFeatureState extends State<MainFeature> {
             color: colorPrimary,
             padding: EdgeInsets.only(
               top: 12,
-              bottom: 12,
+              bottom: 12 + MediaQuery.of(context).padding.bottom,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

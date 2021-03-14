@@ -2285,7 +2285,7 @@ List<Map<String, dynamic>> mockNewArrivalProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mMnHxk4VbMPCnxw5k3jyGmwnfE.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mMnHxk4VbMPCnxw5k3jyGmwnfE.jpg",
     "title": "iPhone 12 Pro Max 128GB",
     "updated_date": "2021-03-12 03:29:00"
   },
@@ -3217,7 +3217,7 @@ List<Map<String, dynamic>> mockNewArrivalProducts = [
       {"alias": "grand-opening-web", "tag_id": "1peHa7haIKeQxjkav4MhEsnoRTi"}
     ],
     "thumbnail_url":
-        "http://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mMv0sDZpqLK7fgIUAzkMO3jhc2.jpg",
+        "https://s3-ap-southeast-1.amazonaws.com/pam-jaymart-prd/ecom/public/1mMv0sDZpqLK7fgIUAzkMO3jhc2.jpg",
     "title": "iPhone 12 Pro 128GB",
     "updated_date": "2021-03-12 03:28:36"
   },

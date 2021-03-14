@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
@@ -6,6 +5,7 @@ import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
 import 'package:singh_architecture/styles/colors.dart';
 import 'package:singh_architecture/styles/fonts.dart';
+import 'package:singh_architecture/widgets/products/product_item.dart';
 
 class ProductHeadLine extends StatefulWidget {
   final IContext context;
@@ -37,6 +37,13 @@ class ProductHeadLineState extends State<ProductHeadLine> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+
+    widget.productRepository.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
       stream: widget.productRepository.isLoadingSC.stream,
@@ -46,12 +53,7 @@ class ProductHeadLineState extends State<ProductHeadLine> {
         }
 
         return Container(
-          padding: EdgeInsets.only(
-            top: 12,
-            bottom: 12,
-            left: 16,
-            right: 16,
-          ),
+          padding: EdgeInsets.all(16),
           margin: widget.margin,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -94,68 +96,8 @@ class ProductHeadLineState extends State<ProductHeadLine> {
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.productRepository.items?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return Container(
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                              left: 8,
-                              right: 8,
-                            ),
-                            height: 125,
-                            width: 125,
-                            child: CachedNetworkImage(
-                                imageUrl: widget.productRepository.items![index]
-                                    .ThumbnailURL,
-                                imageBuilder: (context, image) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: image,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) {
-                                  return Container(
-                                    alignment: Alignment.center,
-                                    child: CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                                  );
-                                },
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error)),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                              bottom: 8,
-                            ),
-                            height: 45,
-                            width: 125,
-                            child: Text(
-                              widget.productRepository.items![index].Title,
-                              style: TextStyle(
-                                fontSize: h6,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Container(
-                            width: 125,
-                            child: Text(
-                              widget.productRepository.items![index].Price,
-                              style: TextStyle(
-                                color: colorSecondary,
-                                fontSize: p,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
+                    return ProductItem(
+                      product: widget.productRepository.items![index],
                     );
                   },
                 ),
