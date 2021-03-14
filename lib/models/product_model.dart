@@ -21,11 +21,11 @@ class ProductModel {
     return ProductModel(
       Id: rawJson["product_id"],
       ThumbnailURL: rawJson["thumbnail_url"],
-      Title: rawJson["title"],
-      Price: rawJson["price_number"],
+      Title: rawJson["title"] ?? "",
+      Price: rawJson["price_number"] ?? "0",
       Rating: 4,
       // Rating: double.parse(rawJson["rating"]),
-      Description: rawJson["description"],
+      Description: rawJson["description"] ?? "",
     );
   }
 

@@ -44,7 +44,7 @@ class LaunchScreenState extends State<LaunchScreen> {
       await this.config.initial();
       await this.myContext.initial();
 
-      sleep(Duration(seconds: 3));
+      // sleep(Duration(seconds: 3));
       widget.launchScreenRepository.toLoadedStatus();
 
       Navigator.of(context).push(
