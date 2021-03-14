@@ -1,12 +1,10 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
-import 'package:singh_architecture/middlewares/general_middle_ware.dart';
+import 'package:singh_architecture/mocks/products/best_seller_products.dart';
+import 'package:singh_architecture/mocks/products/new_arrival_products.dart';
 import 'package:singh_architecture/mocks/products/product_detail.dart';
 import 'package:singh_architecture/mocks/products/products.dart';
 import 'package:singh_architecture/repositories/base_repository.dart';
@@ -14,7 +12,6 @@ import 'package:singh_architecture/repositories/product_repository.dart';
 import 'package:singh_architecture/styles/colors.dart';
 import 'package:singh_architecture/styles/fonts.dart';
 import 'package:singh_architecture/utils/object_helper.dart';
-import 'package:singh_architecture/utils/time_helper.dart';
 import 'package:singh_architecture/widgets/common/top_bar.dart';
 import 'package:singh_architecture/widgets/products/product_slider.dart';
 
@@ -46,7 +43,7 @@ class ProductDetailPageState extends State<ProductDetailPage> {
       config: widget.config,
       options: NewRepositoryOptions(
         baseUrl: "${widget.config.baseAPI()}/products",
-        mockItems: mockProducts,
+        mockItems: [...mockProducts, ...mockNewArrivalProducts, ...mockBestSellerProducts],
         mockItem: mockProductDetail,
       ),
     );
@@ -142,6 +139,64 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                           imageURLs:
                               (this.productRepository.data?.Galleries ?? []),
                         ),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                bottom: 8,
+                              ),
+                              child: Text(
+                                this.productRepository.data?.Title ?? "",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: h3,
+                                  fontWeight: fontWeightBold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      child: Text(
+                                        "฿ ${this.productRepository.data?.Price}",
+                                        style: TextStyle(
+                                          fontSize: h5,
+                                          fontWeight: fontWeightBold,
+                                          color: colorSecondary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Icon(
+                                      Icons.favorite_outline,
+                                      color: Colors.redAccent,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.only(
+                          top: 8,
+                          bottom: 8,
+                          left: 16,
+                          right: 16,
+                        ),
+                        child: Html(
+                            data:
+                                this.productRepository.data?.Description ?? ""),
                       ),
                     ],
                   ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart';
 import 'package:singh_architecture/configs/config.dart';
+import 'package:singh_architecture/mocks/products/products.dart';
 import 'package:singh_architecture/models/product_model.dart';
 import 'package:singh_architecture/repositories/base_repository.dart';
 import 'package:singh_architecture/repositories/types.dart';
@@ -60,7 +61,8 @@ class ProductRepository extends BaseDataRepository<ProductModel> {
 
       if (isMock) {
         await TimeHelper.sleep();
-        data = {"data": this.options.getMockItem()};
+        Map<String, dynamic> mock = this.options.getMockItems()!.firstWhere((element) => id == element["product_id"]);
+        data = {"data": mock};
       } else {
         Response response =
             await Requester.get(this.options.getBaseUrl(), params);
