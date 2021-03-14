@@ -44,4 +44,9 @@ class ProductRepository extends BaseDataRepository<ProductModel> {
       this.toErrorStatus(e);
     }
   }
+
+  @override
+  Future<void> get(String id, {Map<String, dynamic>? params, bool isMock = false}) async {
+
+  }
 }

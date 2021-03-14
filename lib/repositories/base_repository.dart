@@ -107,6 +107,10 @@ class BaseDataRepository<T> implements IBaseDataRepository {
       {Map<String, dynamic>? params, bool isMock: false}) async {}
 
   @override
+  Future<void> get(String id,
+      {Map<String, dynamic>? params, bool isMock: false}) async {}
+
+  @override
   void dispose() {
     this._isLoadingSC.close();
     this._isLoadedSC.close();

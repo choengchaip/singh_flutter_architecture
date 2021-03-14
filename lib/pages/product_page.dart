@@ -105,7 +105,6 @@ class ProductPageState extends State<ProductPage> {
         }
 
         return Container(
-
           child: ListView(
             padding: EdgeInsets.all(8),
             children: [
