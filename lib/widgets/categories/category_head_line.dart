@@ -9,11 +9,13 @@ import 'package:singh_architecture/styles/fonts.dart';
 class CategoryHeadLine extends StatefulWidget {
   final IContext context;
   final IConfig config;
+  final CategoryRepository categoryRepository;
   final EdgeInsets? margin;
 
   CategoryHeadLine({
     required this.context,
     required this.config,
+    required this.categoryRepository,
     this.margin,
   });
 
@@ -24,22 +26,18 @@ class CategoryHeadLine extends StatefulWidget {
 }
 
 class CategoryHeadLineState extends State<CategoryHeadLine> {
-  late CategoryRepository categoryRepository;
-
   @override
   void initState() {
     super.initState();
 
-    this.categoryRepository =
-        widget.context.repositories().categoryRepository();
-    this.categoryRepository.fetch(isMock: true);
+    widget.categoryRepository.fetch(isMock: true);
   }
 
   @override
   void dispose() {
     super.dispose();
 
-    this.categoryRepository.dispose();
+    widget.categoryRepository.dispose();
   }
 
   @override
@@ -47,7 +45,7 @@ class CategoryHeadLineState extends State<CategoryHeadLine> {
     final double categoryWidth = ((MediaQuery.of(context).size.width) - 32) / 5;
 
     return StreamBuilder<bool>(
-      stream: this.categoryRepository.isLoadingSC.stream,
+      stream: widget.categoryRepository.isLoadingSC.stream,
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.data == true) {
           return Container();
@@ -59,8 +57,8 @@ class CategoryHeadLineState extends State<CategoryHeadLine> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
-              ((this.categoryRepository.items?.length ?? 0) < 5
-                  ? this.categoryRepository.items!.length
+              ((widget.categoryRepository.items?.length ?? 0) < 5
+                  ? widget.categoryRepository.items!.length
                   : 5),
               (index) {
                 return Container(
@@ -81,14 +79,14 @@ class CategoryHeadLineState extends State<CategoryHeadLine> {
                           image: DecorationImage(
                             fit: BoxFit.scaleDown,
                             image: CachedNetworkImageProvider(
-                              this.categoryRepository.items![index].ImageURL,
+                              widget.categoryRepository.items![index].ImageURL,
                             )
                           ),
                         ),
                       ),
                       Container(
                         child: Text(
-                          this.categoryRepository.items![index].Title,
+                          widget.categoryRepository.items![index].Title,
                           style: TextStyle(fontSize: s3),
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.clip,

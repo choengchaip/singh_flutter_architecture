@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:singh_architecture/configs/config.dart';
@@ -12,10 +11,12 @@ class BannerHeadLine extends StatefulWidget {
   final IContext context;
   final IConfig config;
   final EdgeInsets? margin;
+  final BannerRepository bannerRepository;
 
   BannerHeadLine({
     required this.context,
     required this.config,
+    required this.bannerRepository,
     this.margin,
   });
 
@@ -27,7 +28,6 @@ class BannerHeadLine extends StatefulWidget {
 
 class BannerHeadLineState extends State<BannerHeadLine> {
   late StreamController<int> currentPageSC;
-  late BannerRepository bannerRepository;
 
   @override
   void initState() {
@@ -36,8 +36,7 @@ class BannerHeadLineState extends State<BannerHeadLine> {
     this.currentPageSC = StreamController<int>();
     this.currentPageSC.add(0);
 
-    this.bannerRepository = widget.context.repositories().bannerRepository();
-    this.bannerRepository.fetch(isMock: true);
+    widget.bannerRepository.fetch(isMock: true);
   }
 
   @override
@@ -49,13 +48,13 @@ class BannerHeadLineState extends State<BannerHeadLine> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
-      stream: this.bannerRepository.isLoadingSC.stream,
+      stream: widget.bannerRepository.isLoadingSC.stream,
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.data == true) {
           return Container(
             height: 175,
             decoration: BoxDecoration(
-              color: colorSecondary,
+              color: colorPrimaryLight,
               borderRadius: BorderRadius.circular(16),
             ),
           );
@@ -76,10 +75,10 @@ class BannerHeadLineState extends State<BannerHeadLine> {
                   onPageChanged: (currentPage) {
                     this.currentPageSC.add(currentPage);
                   },
-                  itemCount: this.bannerRepository.items?.length ?? 0,
+                  itemCount: widget.bannerRepository.items?.length ?? 0,
                   itemBuilder: (context, index) {
                     return BannerItem(
-                      banner: this.bannerRepository.items?[index],
+                      banner: widget.bannerRepository.items?[index],
                     );
                   },
                 ),
@@ -90,12 +89,12 @@ class BannerHeadLineState extends State<BannerHeadLine> {
               builder: (context, snapshot) {
                 return Container(
                   margin: EdgeInsets.only(
-                    bottom: 8,
+                    bottom: 16,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
-                        this.bannerRepository.items?.length ?? 0, (index) {
+                        widget.bannerRepository.items?.length ?? 0, (index) {
                       return AnimatedContainer(
                         duration: Duration(milliseconds: 250),
                         margin: EdgeInsets.only(
