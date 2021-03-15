@@ -1,6 +1,7 @@
 // ignore_for_file: close_sinks
 
 import 'dart:async';
+import 'package:rxdart/rxdart.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/mocks/banners/banners.dart';
 import 'package:singh_architecture/mocks/carts/carts.dart';
@@ -142,13 +143,13 @@ class BaseDataRepository<T> implements IBaseDataRepository {
 
   @override
   void initial() {
-    this._isLoadingSC = StreamController<bool>.broadcast();
-    this._isLoadedSC = StreamController<bool>.broadcast();
-    this._isErrorSC = StreamController<bool>.broadcast();
-    this._errorMessageSC = StreamController<String>.broadcast();
+    this._isLoadingSC = BehaviorSubject<bool>();
+    this._isLoadedSC = BehaviorSubject<bool>();
+    this._isErrorSC = BehaviorSubject<bool>();
+    this._errorMessageSC = BehaviorSubject<String>();
 
-    this._itemsSC = StreamController<List<T>?>.broadcast();
-    this._dataSC = StreamController<T?>.broadcast();
+    this._itemsSC = BehaviorSubject<List<T>?>();
+    this._dataSC = BehaviorSubject<T?>();
   }
 
   @override

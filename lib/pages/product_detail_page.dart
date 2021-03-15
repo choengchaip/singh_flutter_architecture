@@ -54,8 +54,6 @@ class ProductDetailPageState extends State<ProductDetailPage> {
       ),
     );
 
-    this.productRepository.initial();
-
     this.productRepository.get(widget.id, isMock: true);
     widget.context.repositories().cartRepository().fetch();
   }

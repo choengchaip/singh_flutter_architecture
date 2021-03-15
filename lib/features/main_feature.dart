@@ -56,18 +56,30 @@ class MainFeatureState extends State<MainFeature> {
             height: MediaQuery.of(context).padding.top,
             color: colorPrimary,
           ),
-          TopBarSearch(onSearch: (q) {}),
           Expanded(
             child: Container(
-              child: BasePage(
-                pageRepository: this.pageRepository,
-                widgets: [
-                  ProductPage(
-                    context: widget.context,
-                    config: widget.config,
+              child: Stack(
+                children: [
+                  BasePage(
+                    pageRepository: this.pageRepository,
+                    widgets: [
+                      ProductPage(
+                        context: widget.context,
+                        config: widget.config,
+                      ),
+                      Container(),
+                    ],
                   ),
                   Container(
-                    color: Colors.redAccent,
+                    child: StreamBuilder<int>(
+                      stream: this.pageRepository.pageIndexSC.stream,
+                      builder: (context, snapshot) {
+                        return TopBarSearch(
+                          isHide: (snapshot.data == 1),
+                          onSearch: (q) {},
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -84,99 +96,127 @@ class MainFeatureState extends State<MainFeature> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 30,
-                          width: 50,
-                          child: Icon(
-                            Icons.home_outlined,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            widget.context.localeRepository().getString(Locales.home),
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: s,
+                  child: GestureDetector(
+                    onTap: () {
+                      this.pageRepository.jumpTo(0);
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 30,
+                            width: 50,
+                            child: Icon(
+                              Icons.home_outlined,
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Container(
-                                height: 30,
-                                width: 50,
-                                child: Icon(
-                                  Icons.shopping_cart,
-                                  color: Colors.white,
-                                ),
+                          Container(
+                            child: Text(
+                              widget.context
+                                  .localeRepository()
+                                  .getString(Locales.home),
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: s,
+                                color: Colors.white,
                               ),
-                              Positioned(
-                                top: -3,
-                                right: 1,
-                                child: StreamBuilder<bool>(
-                                  stream: widget.context.repositories().cartRepository().isLoadingSC.stream,
-                                  builder: (context, snapshot) {
-                                    print(snapshot.connectionState);
-                                    if(ObjectHelper.isSnapshotStateLoading(snapshot)){
-                                      return Container();
-                                    }
-
-                                    return Container(
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.all(6),
-                                      decoration: BoxDecoration(
-                                        color: colorSecondary,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Text(
-                                        widget.context.repositories().cartRepository().data?.Products.length.toString() ?? "0",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Text(
-                            widget.context.localeRepository().getString(Locales.cart),
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: s,
-                              color: Colors.white,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: (){
-                      print("asd");
-                      widget.context.repositories().cartRepository().fetch();
+                    onTap: () {
+                      this.pageRepository.jumpTo(1);
                     },
                     child: Container(
+                      color: Colors.transparent,
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 50,
+                                  child: Icon(
+                                    Icons.shopping_cart,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: -3,
+                                  right: 1,
+                                  child: StreamBuilder<bool>(
+                                      stream: widget.context
+                                          .repositories()
+                                          .cartRepository()
+                                          .isLoadingSC
+                                          .stream,
+                                      builder: (context, snapshot) {
+                                        if (ObjectHelper.isSnapshotStateLoading(snapshot) || widget.context
+                                            .repositories()
+                                            .cartRepository()
+                                            .data
+                                            ?.Products
+                                            .length == 0) {
+                                          return Container();
+                                        }
+
+                                        return Container(
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(6),
+                                          decoration: BoxDecoration(
+                                            color: colorSecondary,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Text(
+                                            widget.context
+                                                    .repositories()
+                                                    .cartRepository()
+                                                    .data
+                                                    ?.Products
+                                                    .length
+                                                    .toString() ??
+                                                "0",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: Text(
+                              widget.context
+                                  .localeRepository()
+                                  .getString(Locales.cart),
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: s,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      color: Colors.transparent,
                       child: Column(
                         children: [
                           Container(
@@ -189,7 +229,9 @@ class MainFeatureState extends State<MainFeature> {
                           ),
                           Container(
                             child: Text(
-                              widget.context.localeRepository().getString(Locales.notification),
+                              widget.context
+                                  .localeRepository()
+                                  .getString(Locales.notification),
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: s,
@@ -204,6 +246,7 @@ class MainFeatureState extends State<MainFeature> {
                 ),
                 Expanded(
                   child: Container(
+                    color: Colors.transparent,
                     child: Column(
                       children: [
                         Container(
@@ -216,7 +259,9 @@ class MainFeatureState extends State<MainFeature> {
                         ),
                         Container(
                           child: Text(
-                            widget.context.localeRepository().getString(Locales.account),
+                            widget.context
+                                .localeRepository()
+                                .getString(Locales.account),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: s,

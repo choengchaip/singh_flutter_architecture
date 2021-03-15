@@ -15,15 +15,18 @@ import 'package:singh_architecture/repositories/product_repository.dart';
 import 'package:singh_architecture/utils/object_helper.dart';
 import 'package:singh_architecture/widgets/banners/banner_head_line.dart';
 import 'package:singh_architecture/widgets/categories/category_head_line.dart';
+import 'package:singh_architecture/widgets/dialog_tree.dart';
 import 'package:singh_architecture/widgets/products/product_head_line.dart';
 
 class ProductPage extends StatefulWidget {
   final IContext context;
   final IConfig config;
+  final EdgeInsets? padding;
 
   ProductPage({
     required this.context,
     required this.config,
+    this.padding,
   });
 
   @override
@@ -46,7 +49,6 @@ class ProductPageState extends State<ProductPage> {
     this.pageRepository = PageRepository();
     this.pageRepository.toLoadingStatus();
 
-    this.pageRepository.initial();
     this.initialRepositories();
   }
 
@@ -111,11 +113,13 @@ class ProductPageState extends State<ProductPage> {
         }
 
         return Container(
+          padding: widget.padding,
           child: ListView(
             padding: EdgeInsets.all(8),
             children: [
               BannerHeadLine(
                 margin: EdgeInsets.only(
+                  top: 85,
                   bottom: 8,
                 ),
                 context: widget.context,
