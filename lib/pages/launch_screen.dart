@@ -33,6 +33,7 @@ class LaunchScreenState extends State<LaunchScreen> {
 
     this.config = Config();
     this.myContext = Context(
+      buildCtx: this.context,
       config: config,
     );
 

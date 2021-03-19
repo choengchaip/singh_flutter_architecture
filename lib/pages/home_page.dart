@@ -53,6 +53,7 @@ class HomePageState extends State<HomePage> {
   void initialRepositories() {
     try {
       this.bannerRepository = BannerRepository(
+        buildCtx: this.context,
         config: widget.config,
         options: NewRepositoryOptions(
           baseUrl: "${widget.config.baseAPI()}/banners",
@@ -60,6 +61,7 @@ class HomePageState extends State<HomePage> {
         ),
       );
       this.categoryRepository = CategoryRepository(
+        buildCtx: this.context,
         config: widget.config,
         options: NewRepositoryOptions(
           baseUrl: "${widget.config.baseAPI()}/categories",
@@ -67,6 +69,7 @@ class HomePageState extends State<HomePage> {
         ),
       );
       this.newArrivalProductRepository = ProductRepository(
+        buildCtx: this.context,
         config: widget.config,
         options: NewRepositoryOptions(
           baseUrl: "${widget.config.baseAPI()}/products",
@@ -74,6 +77,7 @@ class HomePageState extends State<HomePage> {
         ),
       );
       this.bestSellerProductRepository = ProductRepository(
+        buildCtx: this.context,
         config: widget.config,
         options: NewRepositoryOptions(
           baseUrl: "${widget.config.baseAPI()}/products",
