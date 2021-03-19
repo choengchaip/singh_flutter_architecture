@@ -5,9 +5,9 @@ import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/styles/colors.dart';
 import 'package:singh_architecture/styles/fonts.dart';
 import 'package:singh_architecture/widgets/accounts/account_list_tile.dart';
-import 'package:singh_architecture/widgets/common/loading_stack.dart';
-import 'package:singh_architecture/widgets/common/primary_button.dart';
-import 'package:singh_architecture/widgets/common/top_bar.dart';
+import 'package:singh_architecture/widgets/commons/loading_stack.dart';
+import 'package:singh_architecture/widgets/commons/primary_button.dart';
+import 'package:singh_architecture/widgets/commons/top_bar.dart';
 
 class SettingPage extends StatefulWidget {
   final IContext context;

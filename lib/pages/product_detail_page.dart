@@ -14,9 +14,8 @@ import 'package:singh_architecture/repositories/base_repository.dart';
 import 'package:singh_architecture/repositories/product_repository.dart';
 import 'package:singh_architecture/styles/colors.dart';
 import 'package:singh_architecture/styles/fonts.dart';
-import 'package:singh_architecture/utils/object_helper.dart';
-import 'package:singh_architecture/widgets/common/loading_stack.dart';
-import 'package:singh_architecture/widgets/common/top_bar.dart';
+import 'package:singh_architecture/widgets/commons/loading_stack.dart';
+import 'package:singh_architecture/widgets/commons/top_bar.dart';
 import 'package:singh_architecture/widgets/products/product_slider.dart';
 
 class ProductDetailPage extends StatefulWidget {

@@ -7,8 +7,8 @@ import 'package:singh_architecture/pages/setting_page.dart';
 import 'package:singh_architecture/styles/fonts.dart';
 import 'package:singh_architecture/widgets/accounts/account_list_tile.dart';
 import 'package:singh_architecture/widgets/accounts/order_controller.dart';
-import 'package:singh_architecture/widgets/common/loading_stack.dart';
-import 'package:singh_architecture/widgets/common/top_bar_customize.dart';
+import 'package:singh_architecture/widgets/commons/loading_stack.dart';
+import 'package:singh_architecture/widgets/commons/top_bar_customize.dart';
 
 class AccountPage extends StatefulWidget {
   final IContext context;
