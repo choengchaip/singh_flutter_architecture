@@ -52,7 +52,7 @@ class ProductsPageState extends State<ProductsPage> {
       ),
     );
 
-    this.productRepository.fetchAfterId("", isMock: true);
+    this.productRepository.fetchAfterId(isMock: true);
   }
 
   @override
@@ -120,7 +120,7 @@ class ProductsPageState extends State<ProductsPage> {
                                           if (this
                                               .productRepository
                                               .isLoaded) {
-                                            this.productRepository.fetchAfterId("");
+                                            this.productRepository.fetchAfterId(isMock: true);
                                           }
                                         }
                                       },

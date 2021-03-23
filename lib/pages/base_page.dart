@@ -27,6 +27,7 @@ class BasePageState extends State<BasePage> {
     super.initState();
 
     this.scrollController = ScrollController();
+    widget.pageRepository.setPageSize(widget.widgets.length);
     widget.pageRepository.pageIndexSC.stream.listen((int index) {
       this.scrollController.animateTo(
             index * MediaQuery.of(context).size.width,

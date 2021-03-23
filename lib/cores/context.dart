@@ -39,6 +39,7 @@ class Context implements IContext {
       this._repositories = NewRepository(
         buildCtx: this.buildCtx,
         config: this.config,
+        sharedPreferences: this.sharedPreferences(),
       );
     }
     return this._repositories!;

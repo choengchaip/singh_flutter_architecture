@@ -37,6 +37,8 @@ class PageRepository extends BasePageRepository {
 
   StreamController<int> get pageSizeSC => this._pageSizeSC;
 
+  bool get isLastPage => this._pageIndex == this._pageSize - 1;
+
   @override
   void initial({Function? callback}) {
     this.toLoadingStatus();

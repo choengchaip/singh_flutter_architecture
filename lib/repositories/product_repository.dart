@@ -21,65 +21,12 @@ class ProductRepository extends BaseDataRepository<ProductModel> {
   }) : super(buildCtx, config, options);
 
   @override
-  Future<void> fetch(
-      {Map<String, dynamic>? params, bool isMock = false}) async {
-    try {
-      this.toLoadingStatus();
-      late Map<String, dynamic> data;
-
-      if (params == null) {
-        params = {};
-      }
-
-      if (isMock) {
-        await TimeHelper.sleep();
-        data = {"items": this.options.getMockItems()};
-      } else {
-        Response response =
-            await Requester.get(this.options.getBaseUrl(), params);
-        Map<String, dynamic> js = json.decode(utf8.decode(response.bodyBytes));
-        data = js;
-      }
-
-      this.items = ProductModel.toList(data["items"]);
-      this.itemsSC.add(this.items);
-
-      this.toLoadedStatus();
-    } catch (e) {
-      super.alertError(e);
-      this.toErrorStatus(e);
-    }
+  List<ProductModel> transforms(tss) {
+    return ProductModel.toList(tss);
   }
 
   @override
-  Future get(String id,
-      {Map<String, dynamic>? params, bool isMock = false}) async {
-    try {
-      this.toLoadingStatus();
-      late Map<String, dynamic> data;
-
-      if (params == null) {
-        params = {};
-      }
-
-      if (isMock) {
-        await TimeHelper.sleep();
-        Map<String, dynamic> mock = this.options.getMockItems()!.firstWhere((element) => id == element["product_id"]);
-        data = {"data": mock};
-      } else {
-        Response response =
-            await Requester.get(this.options.getBaseUrl(), params);
-        Map<String, dynamic> js = json.decode(utf8.decode(response.bodyBytes));
-        data = js;
-      }
-
-      this.data = ProductModel.fromJson(data["data"]);
-      this.dataSC.add(this.data);
-
-      this.toLoadedStatus();
-    } catch (e) {
-      super.alertError(e);
-      this.toErrorStatus(e);
-    }
+  ProductModel? transform(ts) {
+    return ProductModel.fromJson(ts);
   }
 }

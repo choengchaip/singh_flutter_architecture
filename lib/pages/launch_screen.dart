@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:singh_architecture/configs/config.dart';
 import 'package:singh_architecture/cores/context.dart';
 import 'package:singh_architecture/features/main_feature.dart';
 import 'package:singh_architecture/middlewares/scaffold_middle_ware.dart';
 import 'package:singh_architecture/repositories/page_repository.dart';
-import 'package:singh_architecture/repositories/product_repository.dart';
 
 class LaunchScreen extends StatefulWidget {
   final BasePageRepository launchScreenRepository;
@@ -25,7 +22,6 @@ class LaunchScreen extends StatefulWidget {
 class LaunchScreenState extends State<LaunchScreen> {
   late IContext myContext;
   late IConfig config;
-  ProductRepository? productRepository;
 
   @override
   void initState() {

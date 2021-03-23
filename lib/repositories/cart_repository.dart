@@ -13,28 +13,29 @@ class CartRepository extends BaseDataRepository<CartModel> {
   final BuildContext buildCtx;
   final IConfig config;
   final IRepositoryOptions options;
+  late CartModel mockData;
 
   CartRepository({
     required this.buildCtx,
     required this.config,
     required this.options,
   }) : super(buildCtx, config, options) {
-    this.data = CartModel(
+    this.mockData = CartModel(
       Id: "c01",
       Products: [],
       Total: 0,
     );
-    this.dataSC.add(this.data);
+    this.dataSC.add(this.mockData);
   }
 
   bool get isAllSelected {
     bool s = true;
 
-    if (this.data == null || this.data?.Products.length == 0) {
+    if (this.mockData.Products.length == 0) {
       return false;
     } else {
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        if (!this.data!.Products[i].isSelected) {
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        if (!this.mockData.Products[i].isSelected) {
           s = false;
         }
       }
@@ -44,7 +45,7 @@ class CartRepository extends BaseDataRepository<CartModel> {
   }
 
   Future<void> mockFetch() async {
-    CartModel cart = this.data!;
+    CartModel cart = this.mockData;
     cart.Total = 0;
 
     await TimeHelper.sleep();
@@ -57,8 +58,8 @@ class CartRepository extends BaseDataRepository<CartModel> {
       }
     }
 
-    this.data = cart;
-    this.dataSC.add(this.data);
+    this.mockData = cart;
+    this.dataSC.add(this.mockData);
   }
 
   Future<void> mockAddToCart(String productID, {int quantity: 1}) async {
@@ -77,9 +78,9 @@ class CartRepository extends BaseDataRepository<CartModel> {
       CartProductModel? cartProduct;
       int? cpIndex;
 
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        if (this.data!.Products[i].Id == product.Id) {
-          cartProduct = this.data!.Products[i];
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        if (this.mockData.Products[i].Id == product.Id) {
+          cartProduct = this.mockData.Products[i];
           cpIndex = i;
           break;
         }
@@ -88,11 +89,11 @@ class CartRepository extends BaseDataRepository<CartModel> {
       if (cpIndex == null) {
         cartProduct = product;
         cartProduct.Quantity = quantity;
-        this.data!.Products.add(cartProduct);
+        this.mockData.Products.add(cartProduct);
       } else {
-        this.data!.Products[cpIndex].Quantity += quantity;
+        this.mockData.Products[cpIndex].Quantity += quantity;
       }
-      this.dataSC.add(this.data!);
+      this.dataSC.add(this.mockData);
 
       await mockFetch();
 
@@ -118,11 +119,11 @@ class CartRepository extends BaseDataRepository<CartModel> {
       CartProductModel product = CartProductModel.fromJson(raw);
       int? cpIndex;
 
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        if (this.data!.Products[i].Id == product.Id) {
-          if (this.data!.Products[i].Quantity <= 1) {
-            this.data!.Products.removeAt(i);
-            this.dataSC.add(this.data!);
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        if (this.mockData.Products[i].Id == product.Id) {
+          if (this.mockData.Products[i].Quantity <= 1) {
+            this.mockData.Products.removeAt(i);
+            this.dataSC.add(this.mockData);
             break;
           }
 
@@ -132,8 +133,8 @@ class CartRepository extends BaseDataRepository<CartModel> {
       }
 
       if (cpIndex != null) {
-        this.data!.Products[cpIndex].Quantity -= 1;
-        this.dataSC.add(this.data!);
+        this.mockData.Products[cpIndex].Quantity -= 1;
+        this.dataSC.add(this.mockData);
       }
 
       await mockFetch();
@@ -153,9 +154,9 @@ class CartRepository extends BaseDataRepository<CartModel> {
 
       CartProductModel? cartProduct;
       int? cpIndex;
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        if (id == this.data!.Products[i].Id) {
-          cartProduct = this.data!.Products[i];
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        if (id == this.mockData.Products[i].Id) {
+          cartProduct = this.mockData.Products[i];
           cpIndex = i;
           break;
         }
@@ -163,8 +164,8 @@ class CartRepository extends BaseDataRepository<CartModel> {
 
       if (cpIndex != null) {
         cartProduct!.isSelected = true;
-        this.data!.Products[cpIndex] = cartProduct;
-        this.dataSC.add(this.data!);
+        this.mockData.Products[cpIndex] = cartProduct;
+        this.dataSC.add(this.mockData);
       }
 
       await mockFetch();
@@ -184,9 +185,9 @@ class CartRepository extends BaseDataRepository<CartModel> {
 
       CartProductModel? cartProduct;
       int? cpIndex;
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        if (id == this.data!.Products[i].Id) {
-          cartProduct = this.data!.Products[i];
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        if (id == this.mockData.Products[i].Id) {
+          cartProduct = this.mockData.Products[i];
           cpIndex = i;
           break;
         }
@@ -194,8 +195,8 @@ class CartRepository extends BaseDataRepository<CartModel> {
 
       if (cpIndex != null) {
         cartProduct!.isSelected = false;
-        this.data!.Products[cpIndex] = cartProduct;
-        this.dataSC.add(this.data!);
+        this.mockData.Products[cpIndex] = cartProduct;
+        this.dataSC.add(this.mockData);
       }
 
       await mockFetch();
@@ -213,10 +214,10 @@ class CartRepository extends BaseDataRepository<CartModel> {
     try {
       await TimeHelper.sleep();
 
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        this.data!.Products[i].isSelected = true;
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        this.mockData.Products[i].isSelected = true;
       }
-      this.dataSC.add(this.data!);
+      this.dataSC.add(this.mockData);
 
       await mockFetch();
 
@@ -233,10 +234,10 @@ class CartRepository extends BaseDataRepository<CartModel> {
     try {
       await TimeHelper.sleep();
 
-      for (int i = 0; i < this.data!.Products.length; i++) {
-        this.data!.Products[i].isSelected = false;
+      for (int i = 0; i < this.mockData.Products.length; i++) {
+        this.mockData.Products[i].isSelected = false;
       }
-      this.dataSC.add(this.data!);
+      this.dataSC.add(this.mockData);
 
       await mockFetch();
 
@@ -253,8 +254,8 @@ class CartRepository extends BaseDataRepository<CartModel> {
     try {
       await TimeHelper.sleep();
 
-      this.data!.Products.removeWhere((cp) => cp.isSelected);
-      this.dataSC.add(this.data!);
+      this.mockData.Products.removeWhere((cp) => cp.isSelected);
+      this.dataSC.add(this.mockData);
 
       await mockFetch();
 

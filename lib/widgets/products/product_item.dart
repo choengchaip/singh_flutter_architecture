@@ -40,8 +40,8 @@ class ProductItemState extends State<ProductItem> {
           children: [
             Container(
               margin: EdgeInsets.only(
-                left: 8,
-                right: 8,
+                left: 16,
+                right: 16,
                 bottom: 8,
               ),
               height: widget.width,

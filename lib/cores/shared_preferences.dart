@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart' as sf;
 
 abstract class ISharedPreferences {
@@ -16,6 +17,13 @@ abstract class ISharedPreferences {
   Future<void> setBool(String key, bool value);
 
   Future<void> remove(String key);
+
+  Map<String, dynamic>? getAuthentication();
+
+  Future<void> setAuthentication({
+    required String token,
+    Map<String, dynamic>? others,
+  });
 }
 
 class SharedPreferences implements ISharedPreferences {
@@ -59,5 +67,27 @@ class SharedPreferences implements ISharedPreferences {
   @override
   Future<void> remove(String key) {
     return this.client.remove(key);
+  }
+
+  @override
+  Map<String, dynamic>? getAuthentication() {
+    String? str = this.getString("authentication");
+    if (str == null) {
+      return null;
+    }
+
+    return json.decode(str);
+  }
+
+  @override
+  Future<void> setAuthentication({
+    required String token,
+    Map<String, dynamic>? others,
+  }) async {
+    String str = json.encode({
+      "token": token,
+      ...(others ?? {}),
+    });
+    return this.setString("authentication", str);
   }
 }
